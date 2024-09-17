@@ -2,6 +2,7 @@
 const express = require('express');
 const todoRoutes = require("./todoRoutes");
 const cors = require('cors');
+const { connectToMongoDB } = require('./src/config/db.config');
 
 const server = express();
 
@@ -23,4 +24,5 @@ server.get("/", (req, res) => {
 const PORT = 4100;
 server.listen(PORT, () => {
     console.log(`Server is listening at ${PORT}`);
+    connectToMongoDB();
 });
