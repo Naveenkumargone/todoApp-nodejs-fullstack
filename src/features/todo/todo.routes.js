@@ -14,6 +14,10 @@ todoRouter.post("/todo", (req, res, next) => {
   todoController.addTodo(req, res, next);
 });
 
+todoRouter.put("/todo/:id", (req, res, next) => {
+  todoController.updateTodo(req, res, next);
+});
+
 todoRouter.delete("/todo/:id", (req, res, next) => {
   todoController.deleteTodo(req, res, next);
 });

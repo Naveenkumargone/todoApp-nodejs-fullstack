@@ -20,8 +20,19 @@ export default class TodoController {
       const { text, completed, date = new Date() } = req.body;
       const newTodo = { text, completed, date };
 
-      await this.todoRepository.addTodo(newTodo);
-      res.status(201).send(newTodo);
+      const todo = await this.todoRepository.addTodo(newTodo);
+      res.status(201).send(todo);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async updateTodo(req, res, next) {
+    try {
+      const id  = req.params.id;
+      const result = await this.todoRepository.updateTodo(id);
+      res.status(201).send(result);
     } catch (error) {
       console.log(error);
       next(error);
@@ -35,7 +46,7 @@ export default class TodoController {
       if (!isdeleted) {
         return res.status(404).send("todo is not found");
       } else {
-        return res.status(200).send("todo deleted successfully");
+        return res.status(200).send(isdeleted);
       }
     } catch (error) {
       console.log(error);
